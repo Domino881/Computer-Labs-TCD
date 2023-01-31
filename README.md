@@ -5,7 +5,6 @@
 ## First year
 
 * Monte Carlo method
-* Trajectory
 
 ## Second year
 
