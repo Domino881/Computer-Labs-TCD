@@ -1,5 +1,6 @@
 # Computer-Labs-TCD
- Code files for computer laboratories in JF and SF years at TCD
+ Code files for computer laboratories completed in my Theoretical Physics course
+ in Trinity College Dublin.
 
 
 ## First year
@@ -12,3 +13,7 @@
 * Projectile Motion
 * Nonlinear Pendulum
 * Fourier Transform
+
+## TPSA Summer Workshop 2023
+
+* Ising Model using MCMC
