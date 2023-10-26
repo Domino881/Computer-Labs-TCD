@@ -59,17 +59,20 @@
 
 \section{Abstract}
 
-For arbitrary potential, the Schr{\"o}dinger equation quickly becomes
-impossible to solve analytically. 
+For an arbitrary potential, the Schr{\"o}dinger equation quickly becomes
+impossible to solve analytically. Therefore, numerical
+methods have become extremely important in predicting the behaviour
+of quantum systems.
 
 Here, energy eigenstates of the infinite well and bounded harmonic 
 potential were found using a "shooting" method
 together with a numerical integration scheme. The found values
-correspond well (to within 5\%) with the analytic solution.
+correspond well (to within 5\%) with the analytic solutions.
 
 The uncertainties of $x$ and $p$ in both potentials were calculated
-at different energy states and the uncertainty principle was shown
-to hold.
+at different energy states. Their product was found to increase
+linearly with excitation number in both cases and the uncertainty principle 
+was shown to hold.
 
 Finally, the bounded harmonic potential energies were shown to be
 approximately evenly spaced for the first 10 states, and become
@@ -77,29 +80,19 @@ quadratic - as in the case of the infinite well - past that point.
 
 % include all results!
 
-\section{Overview}
-
-The Schr{\"o}dinger equation is one of the most important equations
-of quantum mechanics. It can be, however, extremely difficult or
-even impossible to solve analytically for different potentials. 
-For that reason, numerical methods utilizing discretization are
-commonly used to integrate solutions for a given energy. Finding the
-values of energy which produce physical wavefunctions - an eigenvalue
-problem - is a challenge in itself. One approach to solving it is
-to utilise some properties of the equation to recursively approach
-these values up to some given tolerance.
-
-\subsection{Analytical solutions}
+\section{Theoretical Background}
 
 In considering a system contained within a finite region of space, say from
 $x=0$ to $x=L$, and with a given potential and particle mass, the
-Schr{\"o}dinger equation in dimensionless form is:
+Schr{\"o}dinger equation can be converted to its dimensionless form:
 \begin{align}
      &\frac{d^2 \psi(\tilde{x})}{d\tilde{x}^2}+\gamma^2 (\epsilon-\nu(\tilde{x})))\psi(\tilde{x})=0
      \label{eq:2}
 \end{align}
 
-where$\qquad\tilde{x}=x/L,\quad \epsilon=E/V_0,\quad \nu(\tilde{x})=V(\tilde{x})/V_0,\quad \gamma^2=\frac{2mL^2V_0}{\hbar^2}$.
+where $\tilde{x}=x/L,\quad \epsilon=E/V_0$ is the dimensionless energy, 
+$\nu(\tilde{x})=V(\tilde{x})/V_0$ the dimensionless potential, and 
+$\quad \gamma^2=\frac{2mL^2V_0}{\hbar^2}$.
 
 To solve Equation \ref{eq:2} for the infinite potential well, write:
 $  \nu(\tilde{x})=
@@ -113,9 +106,10 @@ a simple solution of the form:
 $$\psi(\tilde{x})=c_1 e^{i \gamma \sqrt{\epsilon+1} x} +c_2 e^{-i \gamma \sqrt{\epsilon+1} x}$$
 
 The disallowed region imposes additional conditions that $\psi(\tilde{x})=0$
-for $\tilde{x}\leq0$ or $\tilde{x}\geq1$. These as well as normalisation
+for $\tilde{x}\leq0$ and $\tilde{x}\geq1$. These as well as normalisation
 allow for the solving of $c_1$ and
-$c_2$, as well as restrict the values of $\omega$. The final solution becomes:
+$c_2$, as well as restrict the values of the exponent.
+The final solution becomes:
 \begin{equation}
   \psi(\tilde{x})=\sqrt{2}\sin(\gamma \sqrt{\epsilon+1} \tilde{x}),\quad \gamma\sqrt{\epsilon+1}=2\pi n
 \end{equation}
@@ -133,7 +127,7 @@ $V(x)=\frac{1}{2}k x^2$\cite{grif}:
   \quad n=0,1,2,...
 \end{equation}
 
-To convert the potential into the dimensionless form being analysed,
+To convert the potential $V(x)$ into the dimensionless form being analysed,
 $\nu(\tilde{x})=8(\tilde{x}-0.5)^2-1$,\\
  set $k=  \frac{16V_0}{L^2}$.  This allows us to solve for $\epsilon_n$:
 \begin{equation}
@@ -141,13 +135,15 @@ $\nu(\tilde{x})=8(\tilde{x}-0.5)^2-1$,\\
   (n+\frac{1}{2})\frac{4\sqrt{2}}{\gamma}-1
 \end{equation}
 
-Note that here $E$ was shifted down by $V_0$, together with $V(x)$.
-Here the energy values are evenly spaced.
+Note that here $E$ was shifted down by $V_0$, together with $V(x)$ and
+the whole system moved to the right by $L/2$.
+The energy values in this case are evenly spaced.
 
 To calculate $\Delta \tilde{x}=\sqrt{\langle \tilde{x}^2\rangle-\langle\tilde{x}\rangle^2}$,
 it is useful to note that for symmetric potentials, the particle is as likely to be 
 "on the left" as it is "on the right" of the axis of symmetry, meaning $\langle \tilde{x}\rangle$
-is precisely the position of that axis. In the cases examined here, $\langle x \rangle=0.5$.
+is precisely the position of that axis. In the cases examined here, 
+$\langle \tilde{x} \rangle=0.5$.
 
 The second moment of $\tilde{x}$ can be calculated using
 \begin{equation}
@@ -159,7 +155,7 @@ non-dimensional momentum operator is $\hat{\tilde{p}}=-i\frac{d}{dx}$.
 Then, $\langle \tilde{p}\rangle=\langle\psi^*|\hat{\tilde{p}}|\psi\rangle$=
 $-i\int_0^1\psi\frac{d\psi}{d\tilde{x}}d\tilde{x}$ for real $\psi$. But since
 $\psi(0)=\psi(1)=0$, integration by parts of the above yields that
-$\langle\hat{\tilde{p}}\rangle=0$.
+$\langle\hat{\tilde{p}}\rangle=-\langle\hat{\tilde{p}}\rangle=0$.
 
 Similarly, $\langle \tilde{p}^2\rangle=\langle\psi^*|\hat{\tilde{p}}^2|\psi\rangle$=
 $-\int_0^1\psi\frac{d^2\psi}{d\tilde{x}^2}d\tilde{x}$ and therefore:
@@ -233,29 +229,14 @@ up with opposite signs, there must be one for which $\psi(1)=0$.
 \vspace{-.4cm}
 \subsection{Infinite well potential}
 
-The wavefunctions of the first three found eigenstates were plotted and
+The wavefunctions of the first three found eigenstates were plotted
+(Figure \ref{fig:5}) and
 the result appears to correspond to the analytic solutions. To actually
-check the accuracy, the error in the first eigenstate was plotted and found to
+check the accuracy, the error in the first eigenstate was plotted 
+(Figure \ref{fig:6}) and found to
 be less than 0.005.
 
-\begin{figure}[htbp]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics*[width=0.851\linewidth]{ex_eigenstates1.png}
-    \captionsetup{width=0.9\textwidth}
-    \vspace{-.3cm}
-    \caption{First three generated eigenstates of the infinite well potential}
-  \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
-    \centering
-    \includegraphics*[width=0.85\linewidth]{error_sin.png}
-    \captionsetup{width=0.9\textwidth}
-    \vspace{-.3cm}
-    \caption{Absolute error between the generated and analytic solution}
-  \end{minipage}
-\end{figure}
-
-\begin{table}[h]
+\begin{table}[t]
   \centering
   \caption{Normalised eigenstate energies $\epsilon_n$ - infinite well}
   \label{tab:1}
@@ -279,39 +260,47 @@ be less than 0.005.
 
 The obtained eigenstate energies were compared with the analytical
 results for a given tolerance and the errors were calculated
-(Table \ref{tab:1}).
+(Table \ref{tab:1}). The errors are relatively small, but 
+for higher energy states increase beyond the tolerance.
 
-\begin{wrapfigure}[9]{r}{0.5\textwidth}
+\begin{wrapfigure}[10]{r}{0.5\textwidth}
   \vspace{-1cm}
   \centering
   \captionsetup{width=0.4\textwidth}
   \includegraphics*[width=0.4\textwidth]{error_vs_tol.png}
   \vspace{-.3cm}
   \caption{Absolute error in eigenstate energies vs. tolerance}
+  \label{fig:1}
 \end{wrapfigure}
 
 To further investigate how the tolerance 
 value affects the accuracy, the errors of the first three energies were
 plotted for different tolerances.
-It is clear that the tolerance value affects the resulting accuracy significantly.
-However, the above figure also shows the existence of other sources of error - 
+It is clear that its value affects the resulting accuracy significantly.
+However, Figure \ref{fig:1} also shows the existence of other sources of error - 
 which have the dominant effect when tolerance is low enough.
 
-\vspace{.4cm}
+\vspace{.2cm}
 It seems most likely that the main source of these errors would be the accuracy of
 the numerical integration. This is consistent with the observed relation where 
 higher energies, corresponding to more rapidly oscillating and thus more error-prone
 wavefunctions, have larger errors.
 
 The uncertainty relation for the infinite well potential was checked by plotting 
-$\Delta x \Delta p$ at the calculated eigenstate energies $\epsilon_n$.
-It is clear that the uncertainty increases with energy, and the minimum
-value of $1/2$ is never achieved.
+$\Delta x \Delta p$ at the calculated eigenstate energies $\epsilon_n$
+(Figure \ref{fig:2}).
+It is clear that the uncertainty increases linearly
+with energy, and the minimum value of $1/2$ is not achieved for any
+of the eigenstates.
 
-\begin{figure}[h]
+\vspace{-.2cm}
+
+\begin{figure}[!h]
   \centering
-  \includegraphics*[width=0.6\textwidth]{uncertainty1.png}
+  \includegraphics*[width=0.65\textwidth]{uncertainty1.png}
+  \vspace{-.2cm}
   \caption{Uncertainty relation - infinite well}
+  \label{fig:2}
 \end{figure}
 
 \subsection{Bounded harmonic potential}
@@ -339,16 +328,19 @@ value of $1/2$ is never achieved.
 
 The calculated eigenstate energies were, again, compared to the analytical solutions.
 However, since there is no analytic solution for the harmonic potential bounded by
-infinite walls, the solutions of the unbounded harmonic potential was used to compare.
+infinite walls, the solutions of the unbounded harmonic potential were used to compare.
 The discussion of this approximation can be found in the later part of this section.
 
-Again, like in the case of the infinite well, it is clear that there are other
+Again, like in the case of the infinite well, the results correspond well
+but it is clear that there are other
 sources of error than the set tolerance - particularly at higher energies.
 
 This time, in plotting the uncertainty,
 20 of the first eigenstate energies were used. Again, as in the 
 previous case, the uncertainty increases linearly with energy,
-however this time reaching the minimum value of $1/2$ at $n=0$.
+however this time reaching the minimum value of $1/2$ at $n=0$ - showing
+that the lowest state of the harmonic oscillator is the minimum uncertainty
+packet.
 
 \begin{figure}[!h]
     \centering
@@ -356,23 +348,7 @@ however this time reaching the minimum value of $1/2$ at $n=0$.
     \caption{Uncertainty relation - bounded harmonic potential}
 \end{figure}
 
-\pagebreak
-
-\begin{figure}[!h]
-  \begin{subfigure}{0.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{ex_eigenstates2.png}
-    \caption{Low energy states}
-  \end{subfigure}%
-  \begin{subfigure}{0.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{ex_eigenstates3.png}
-    \caption{High energy states}
-  \end{subfigure}
-  \caption{Example eigenstates of the bounded harmonic potential}
-\end{figure}
-
-The above plots of the generated eigenstates show that the bounded
+Plots of the generated eigenstates (Figure \ref{fig:7}) show that the bounded
 harmonic approximation is accurate at lower energies but breaks down
 at higher ones.
 There, the system effectively starts behaving like an infinite
@@ -380,22 +356,24 @@ square well -
 the solutions appear to have roots at $x=0$ and $x=1$, instead of identically 
 converging to 0.
 
-\begin{wrapfigure}[8]{R}{0.5\textwidth}
-  \vspace{-1.1cm}
+\begin{wrapfigure}[8]{R}{0.45\textwidth}
   \centering
-  \includegraphics[width=0.7\linewidth]{diff_energies.png}
+  \vspace{-.3cm}
+  \includegraphics[width=\linewidth]{diff_energies.png}
   \captionsetup{width=0.8\linewidth}
-  \vspace{-.4cm}
+  \vspace{-.6cm}
   \caption{Differences between consecutive energies - bounded harmonic}
 \end{wrapfigure}
 
 \vspace{.5cm}
 
-Another way of clearly observing the discrepancy, is to look at differences between
+Another way of clearly observing the limitations of this approach
+is to look at differences between
 consecutive eigenstate energies calculated by the algorithm: 
 For low values of $n$, the energies are evenly spaced - in accordance with the 
 harmonic potential. However, for $n$ higher than around 10 the plot shifts into the
-infinite well region - and produces a line with the slope of 2, as predicted by
+infinite well region - and produces a line with the slope of 2,
+indicating quadratically spaced energies, as predicted by
 that type of potential.
 
 \vspace{1.3cm}
@@ -427,5 +405,45 @@ the quantum harmonic oscillator.
 
 \bibliography{refs}
 \bibliographystyle{plain}
+
+\pagebreak
+
+\section{Appendix}
+
+\begin{figure}[htbp]
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics*[width=\linewidth]{ex_eigenstates1.png}
+    \captionsetup{width=0.9\textwidth}
+    \vspace{-.3cm}
+    \caption{First three generated eigenstates of the infinite well potential}
+    \label{fig:5}
+  \end{minipage}%
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics*[width=\linewidth]{error_sin.png}
+    \captionsetup{width=0.9\textwidth}
+    \vspace{-.3cm}
+    \caption{Absolute error between the generated and analytic solution}
+    \label{fig:6}
+  \end{minipage}
+\end{figure}
+
+\vspace{2cm}
+
+\begin{figure}[!h]
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{ex_eigenstates2.png}
+    \caption{Low energy states}
+  \end{subfigure}%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{ex_eigenstates3.png}
+    \caption{High energy states}
+  \end{subfigure}
+  \caption{Example eigenstates of the bounded harmonic potential}
+  \label{fig:7}
+\end{figure}
 
 \end{document}
